@@ -2,10 +2,10 @@
 #include "stats.h"
 
 struct Stats compute_statistics(const float* numberset, int setlength) {
-    struct Stats s;
-    s.average = 0;
-    s.min = 0;
-    s.max = 0;
+    struct Stats stat;
+    stat.average = 0;
+    stat.min = 0;
+    stat.max = 0;
     
     int counter = 0;
     float sum = 0, min, max;
@@ -16,7 +16,7 @@ struct Stats compute_statistics(const float* numberset, int setlength) {
         
         while(counter < setlength)
         {
-            sum += numberset[counter];
+            sum =sum + numberset[counter];
             if(min > numberset[counter])
             {
                 min = numberset[counter];
@@ -28,18 +28,18 @@ struct Stats compute_statistics(const float* numberset, int setlength) {
             
             counter++;
         }
-        s.average = sum / setlength;
-        s.min = min;
-        s.max = max;
+        stat.average = sum / setlength;
+        stat.min = min;
+        stat.max = max;
     }
     else
     {
-        s.average = NAN;
-        s.min = NAN;
-        s.max = NAN;
+        stat.average = NAN;
+        stat.min = NAN;
+        stat.max = NAN;
     }
     
-    return s;
+    return stat;
 }
 
 void check_and_alert(float maxThreshold, alerter_funcptr alerters[], int alerterCount, struct Stats computedStats)
