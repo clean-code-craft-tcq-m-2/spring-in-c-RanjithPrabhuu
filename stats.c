@@ -54,3 +54,21 @@ void ledAlert(void)
 {
     ledAlertCount++;
 }
+
+void check_and_alert(float maxThreshold, alerter_funcptr alerters[], int alerterCount, struct Stats computedStats)
+{
+    int counter = 0;
+
+    if(computedStats.max > maxThreshold)
+    {
+        while(counter < alerterCount)
+        {
+            if(alerters[counter] != (void *)0)
+            {
+                alerters[counter]();
+            }
+            counter++;
+        }
+    }
+}
+
